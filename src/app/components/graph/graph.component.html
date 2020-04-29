@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="section">
+        <div class="visualizer">
+            <div class="row" *ngFor="let row of graph">
+                <app-node *ngFor="let node of row" [node]="node"></app-node>
+            </div>
+        </div>
+    </div>
+</div>

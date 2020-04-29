@@ -1,0 +1,6 @@
+.node{
+    width: 2.3vw;
+    height: 2.3vw;
+    display: flex;
+    border: solid 1px black;
+}
