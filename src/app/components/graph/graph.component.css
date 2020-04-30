@@ -1,6 +1,9 @@
 .section{
-    width: 100vw;
     flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: calc(100vh - 142px);
 }
 
 .visualizer{
@@ -8,6 +11,8 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    border: solid 2px #424250;
+    width: 93.9vw;
 }
 
 .row{

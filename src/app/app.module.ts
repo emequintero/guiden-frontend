@@ -7,6 +7,8 @@ import { GraphComponent } from './components/graph/graph.component';
 import { NavComponent } from './components/nav/nav.component';
 import { GuidenComponent } from './components/guiden/guiden.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MaterialModule} from './material.module';
+import { LegendComponent } from './components/legend/legend.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import { HttpClientModule } from '@angular/common/http';
     NodeComponent,
     GraphComponent,
     NavComponent,
-    GuidenComponent
+    GuidenComponent,
+    LegendComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

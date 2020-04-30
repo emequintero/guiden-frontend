@@ -1,2 +1,40 @@
-<button (click)="findPath()">DJIKSTRA</button>
-<button (click)="resetGraph()">RESET</button>
+<div class="container">
+    <div class="section title">
+        <h1 mdcHeading7>GUIDEN: A Pathfinding Algorithm Visualizer</h1>
+    </div>
+    <div class="section button">
+        <button class="button-guiden" mdc-button raised outlined (click)="resetGraph()">RESET GRAPH</button>
+    </div>
+    <div class="section button">
+        <div mdcMenuSurfaceAnchor #algorithmAnchor>
+            <button class="button-guiden" mdc-button raised outlined (click)="algorithmGroup.open = !algorithmGroup.open">
+                <mdc-icon>arrow_drop_down</mdc-icon>{{selectedAlgo | uppercase}}
+            </button>
+            <mdc-menu #algorithmGroup [anchorElement]="algorithmAnchor">
+                <mdc-list>
+                    <mdc-list-item *ngFor="let algo of algorithms" [value]="algo"
+                        (click)="setAlgorithm($event.target.innerHTML)">
+                        {{algo}}
+                    </mdc-list-item>
+                </mdc-list>
+            </mdc-menu>
+        </div>
+    </div>
+    <div class="section help">
+        <div mdcMenuSurfaceAnchor #helpAnchor>
+            <button mdcIconButton (click)="help.open = !help.open">
+                <mdc-icon>help_outline</mdc-icon>
+            </button>
+            <mdc-menu #help [anchorElement]="helpAnchor">
+                <mdc-list>
+                    <mdc-list-item class="description">
+                        {{algoDescription}}
+                    </mdc-list-item>
+                </mdc-list>
+            </mdc-menu>
+        </div>
+    </div>
+    <div class="section button">
+        <button class="button-guiden-alt" mdc-button raised (click)="findPath()">FIND PATH</button>
+    </div>
+</div>

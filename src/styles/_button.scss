@@ -1,0 +1,24 @@
+// styles/_button.scss
+
+@use '@material/button/mdc-button';
+@use '@material/button';
+@use '@material/theme';
+@use '@material/icon-button/mdc-icon-button';
+@use '@material/icon-button/_index' as icon-button;
+
+.button-primary {
+  @include button.filled-accessible(theme.$primary);
+}
+
+.button-secondary {
+  @include button.filled-accessible(theme.$secondary);
+}
+
+.button-guiden {
+  @include button.container-fill-color(#212121);
+  @include button.outline-color(ghostwhite);
+}
+
+.button-guiden-alt {
+  @include button.container-fill-color(#80B94A);
+}

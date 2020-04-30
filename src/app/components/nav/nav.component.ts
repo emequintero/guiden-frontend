@@ -9,6 +9,9 @@ import {Node} from '../../models/node';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  algoDescription:string = "";
+  algorithms:string[] = ["Dijkstra", "A*"];
+  selectedAlgo:string = "Dijkstra";
   constructor(private algoService:AlgoService, private dependenciesService:DependenciesService) { }
 
   ngOnInit(): void {
@@ -16,7 +19,7 @@ export class NavComponent implements OnInit {
 
   findPath(){
     this.algoService.findPath("dijkstra", 
-    this.dependenciesService.getStart(), this.dependenciesService.getEnd(), 
+    this.dependenciesService.getStart(), this.dependenciesService.getFinish(), 
     this.dependenciesService.getRows(), this.dependenciesService.getColumns(), 
     this.dependenciesService.getWalls())
     .subscribe(algoResponse=>{
@@ -52,6 +55,10 @@ export class NavComponent implements OnInit {
     this.dependenciesService.resetGraph();
     //reset walls
     this.dependenciesService.resetWalls();
+  }
+
+  setAlgorithm(){
+
   }
 
 }

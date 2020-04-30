@@ -1,26 +1,80 @@
-.node{
-    width: 3vw;
-    height: 3vw;
+.node {
+    width: 2.2vw;
+    height: 2.2vw;
     display: flex;
-    border: solid 1px black;
+    border: solid 1px #B2DFDB;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
 }
 
-.path{
-    background-color: yellow;
+.ngx-mdc-icon{
+    font-size: 2.2vw;
 }
 
-.start{
-    background-color: red;
+.path {
+    animation-name: foundpath;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
 }
 
-.finish{
-    background-color: blue;
+.visited {
+    background-color: transparent;
+    animation-name: pathfind;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
 }
 
-.visited{
-    background-color: green;
+.wall {
+    background-color: #262626;
 }
 
-.wall{
-    background-color: black;
+/* pathfinding animation */
+
+@keyframes pathfind {
+    0% {
+        transform: scale(0.3);
+        background-color: #23036A;
+        border-radius: 100%;
+    }
+    50% {
+        background-color: #6200EE;
+    }
+    75% {
+        transform: scale(1.2);
+        background-color: #01A299;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #03DAC6;
+    }
+}
+
+@keyframes foundpath {
+    0% {
+        transform: scale(0.6);
+        border-color: #B7FF6A;
+        background-color: #B7FF6A;
+    }
+    50% {
+        transform: scale(1.2);
+        border-color: #B7FF6A;
+        background-color: #B7FF6A;
+    }
+    100% {
+        transform: scale(1);
+        border-color: #B7FF6A;
+        background-color: #B7FF6A;
+    }
 }

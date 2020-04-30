@@ -1,0 +1,35 @@
+.container{
+    width: 100vw;
+    flex-wrap: nowrap;
+}
+
+.section{
+    width: 20%;
+    height: 64px;
+    flex-direction: row;
+}
+
+.ngx-mdc-icon{
+    font-size: 2vw;
+    margin-right: 1.1vw;
+}
+
+.node {
+    width: 1.8vw;
+    height: 1.8vw;
+    cursor: pointer;
+    user-select: none;
+    margin-right: 1.5vw;
+}
+
+.wall {
+    background-color: #262626;
+}
+
+.visited{
+    background-color: #03DAC6;
+}
+
+.path{
+    background-color: #B7FF6A;
+}

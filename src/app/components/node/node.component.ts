@@ -13,20 +13,20 @@ export class NodeComponent implements OnInit {
   @Output() nodeChange: EventEmitter<Node> = new EventEmitter<Node>();
   @Input() prevNode: NodeComponent;
   @Output() prevNodeChange: EventEmitter<NodeComponent> = new EventEmitter<NodeComponent>();
-  className: string;
+  className: string = "";
   constructor(private dependenciesService: DependenciesService, private movementService: MovementService) { }
 
   ngOnInit(): void {
-    if (this.node.isInShortestPath === true) {
+    if (this.node.isInShortestPath) {
       this.className = "node path";
     }
-    else if (this.node.isStart === true) {
+    else if (this.node.isStart) {
       this.className = "node start";
     }
-    else if (this.node.isFinish === true) {
+    else if (this.node.isFinish) {
       this.className = "node finish";
     }
-    else if (this.node.isVisited === true) {
+    else if (this.node.isVisited) {
       this.className = "node visited";
     }
     else {
@@ -39,17 +39,16 @@ export class NodeComponent implements OnInit {
     let movingStartNode: boolean = this.movementService.getMovingStartNode();
     let updatingNodes: boolean = this.movementService.getUpdatingNodes();
     if (updatingNodes) {
-      if (!this.node.isFinish && !this.node.isStart
-        && !movingEndNode && !movingStartNode) {
+      if (!movingEndNode && !movingStartNode && !this.node.isFinish && !this.node.isStart) {
         //toggle is wall
         this.node.isWall = !this.node.isWall;
         //change color if node is wall
-        if (this.node.isWall) {
+        if (this.node.isWall && !this.node.isFinish && !this.node.isStart) {
           this.className = "node wall";
           //add to walls
           this.dependenciesService.addWall([this.node.row, this.node.column]);
         }
-        else {
+        else if(!this.node.isWall && !this.node.isFinish && !this.node.isStart){
           this.className = "node";
         }
       }
@@ -60,7 +59,7 @@ export class NodeComponent implements OnInit {
           //set new start point
           this.dependenciesService.setStart([this.node.row, this.node.column]);
           //set previous node to blank spot
-          this.prevNode.node.isStart = false
+          this.prevNode.node.isStart = false;
           this.prevNode.className = "node";
           //set new style to node start
           this.node.isStart = true;
@@ -69,7 +68,7 @@ export class NodeComponent implements OnInit {
         //move end node
         else if (movingEndNode && typeof this.prevNode != "undefined") {
           //set new end point
-          this.dependenciesService.setEnd([this.node.row, this.node.column]);
+          this.dependenciesService.setFinish([this.node.row, this.node.column]);
           //set previous node to blank spot
           this.prevNode.node.isFinish = false
           this.prevNode.className = "node";

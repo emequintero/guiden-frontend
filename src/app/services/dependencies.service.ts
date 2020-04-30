@@ -6,19 +6,15 @@ import { Node } from '../models/node';
   providedIn: 'root',
 })
 export class DependenciesService {
-  private start: number[] = [3, 7];
-  private end: number[] = [10, 25];
-  private rows: number = 12;
-  private columns: number = 30;
+  private start: number[] = [5, 11];
+  private finish: number[] = [5, 28];
+  private rows: number = 13;
+  private columns: number = 40;
   private walls: number[][] = [];
   private graph: GraphComponent = null;
   private path: Node[];
   private visitedNodesInOrder: Node[];
   constructor() { }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-  }
 
   getStart(): number[] {
     return this.start;
@@ -28,12 +24,12 @@ export class DependenciesService {
     this.start = start;
   }
 
-  getEnd(): number[] {
-    return this.end;
+  getFinish(): number[] {
+    return this.finish;
   }
 
-  setEnd(end: number[]) {
-    this.end = end;
+  setFinish(finish: number[]) {
+    this.finish = finish;
   }
 
   setRows(rows: number) {

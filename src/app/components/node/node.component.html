@@ -1,3 +1,7 @@
 <div [class]="className" (mouseover)="nodeViewUpdate()" 
 (mouseup)="stopUpdate()" (mousedown)="startUpdate()"
-draggable="false"></div>
+draggable="false" [ngSwitch]="className">
+    <mdc-icon *ngSwitchCase="'node start'">control_camera</mdc-icon>
+    <mdc-icon *ngSwitchCase="'node finish'">blur_circular</mdc-icon>
+    <div *ngSwitchDefault></div>
+</div>
