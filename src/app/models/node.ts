@@ -9,5 +9,7 @@ export class Node{
     isFinish:boolean = false;
     isStart:boolean = false;
     isWall:boolean = false;
+    isInShortestPath:boolean = false;
+    isVisited:boolean = false;
     previousNode:Node = null;
 }

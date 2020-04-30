@@ -1,6 +1,22 @@
 .node{
-    width: 2.3vw;
-    height: 2.3vw;
+    width: 3vw;
+    height: 3vw;
     display: flex;
     border: solid 1px black;
+}
+
+.path{
+    background-color: yellow;
+}
+
+.start{
+    background-color: red;
+}
+
+.finish{
+    background-color: blue;
+}
+
+.visited{
+    background-color: green;
 }
