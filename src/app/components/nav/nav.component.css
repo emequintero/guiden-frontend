@@ -48,6 +48,7 @@
 .container{
     background-color: #212121;
     color: #F5F5F5;
+    width: 100vw;
 }
 
 .section.title,.section.button{

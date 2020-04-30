@@ -1,4 +1,20 @@
-.section{
+@media only screen and (max-width:400px) {
+    div.section {
+        height: auto !important;
+        margin: 10vw 0;
+    }
+    div.visualizer{
+        height: auto;
+    }
+}
+
+@media only screen and (min-width:401px) and (max-width:960px) {
+    div.visualizer {
+        width: 86vw !important;
+    }
+}
+
+.section {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
@@ -6,7 +22,7 @@
     height: calc(100vh - 142px);
 }
 
-.visualizer{
+.visualizer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,7 +31,7 @@
     width: 93.9vw;
 }
 
-.row{
+.row {
     width: 95vw;
     display: flex;
     flex-wrap: wrap;

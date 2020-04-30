@@ -1,0 +1,16 @@
+@media only screen and (max-width : 400px){
+    div.section.legend{
+        order: 3;
+    }
+}
+
+@media only screen and (min-width : 401px) and (max-width : 960px){
+    div.section.legend{
+        order: 3;
+    }
+}
+
+.section{
+    align-items: initial;
+    justify-content: initial;
+}

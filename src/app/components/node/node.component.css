@@ -1,3 +1,23 @@
+@media only screen and (max-width:400px) {
+    div.node {
+        width: 1.8vw !important;
+        height: 1.8vw !important;
+    }
+    .ngx-mdc-icon {
+        font-size: 3vw;
+    }
+}
+
+@media only screen and (min-width:401px) and (max-width:960px) {
+    div.node {
+        width: 1.8vw !important;
+        height: 1.8vw !important;
+    }
+    .ngx-mdc-icon {
+        font-size: 3vw;
+    }
+}
+
 .node {
     width: 2.2vw;
     height: 2.2vw;
@@ -9,8 +29,19 @@
     user-select: none;
 }
 
-.ngx-mdc-icon{
+.ngx-mdc-icon {
     font-size: 2.2vw;
+}
+
+.start, .finish {
+    animation-name: movenode;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
 }
 
 .path {
@@ -37,7 +68,14 @@
 }
 
 .wall {
-    background-color: #262626;
+    animation-name: makewall;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
 }
 
 /* pathfinding animation */
@@ -76,5 +114,32 @@
         transform: scale(1);
         border-color: #B7FF6A;
         background-color: #B7FF6A;
+    }
+}
+
+@keyframes makewall {
+    0% {
+        transform: scale(0.6);
+        background-color: #262626;
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: #262626;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #262626;
+    }
+}
+
+@keyframes movenode {
+    0% {
+        transform: scale(0.6);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
     }
 }
