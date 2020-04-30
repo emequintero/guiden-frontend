@@ -1,5 +1,6 @@
-import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlgoService } from 'src/app/services/algo.service';
+import { DependenciesService } from 'src/app/services/dependencies.service';
 import {Node} from '../../models/node';
 
 @Component({
@@ -8,51 +9,49 @@ import {Node} from '../../models/node';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  @Input() path:Node[];
-  @Output() pathChange:EventEmitter<Node[]> = new EventEmitter<Node[]>();
-  @Input() visitedNodesInOrder:Node[];
-  @Output() visitedNodesInOrderChange:EventEmitter<Node[]> = new EventEmitter<Node[]>();
-  @Input() rows:number;
-  @Input() columns:number;
-  @Input() start:number[];
-  @Input() end:number[];
-  @Input() reset:boolean;
-  @Output() resetChange:EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(private algoService:AlgoService) { }
+  constructor(private algoService:AlgoService, private dependenciesService:DependenciesService) { }
 
   ngOnInit(): void {
   }
 
   findPath(){
-    this.algoService.findPath("dijkstra", this.start, this.end, this.rows, this.columns).subscribe(algoResponse=>{
-      //visitedNodesInOrder (search animation)
-      this.visitedNodesInOrder = algoResponse["visitedNodesInOrder"].map(node=>{
+    this.algoService.findPath("dijkstra", 
+    this.dependenciesService.getStart(), this.dependenciesService.getEnd(), 
+    this.dependenciesService.getRows(), this.dependenciesService.getColumns(), 
+    this.dependenciesService.getWalls())
+    .subscribe(algoResponse=>{
+      //set visited nodes in order
+      let visitedNodesInOrder:Node[] = algoResponse["visitedNodesInOrder"].map(node=>{
         let currentNode:Node = new Node(node["row"],node["column"]);
         currentNode.distance = node["distance"];
         currentNode.isFinish = node["finish"];
         currentNode.isStart = node["start"];
+        currentNode.isWall = node["wall"];
         currentNode.isVisited = true;
         return currentNode;
       });
-      //bubble up event
-      this.visitedNodesInOrderChange.emit(this.visitedNodesInOrder);
-      //shortestPath (final path animation)
-      this.path = algoResponse["path"].map(node=>{
+      this.dependenciesService.setVisitedNodesInOrder(visitedNodesInOrder);
+      //path (final path animation)
+      let path = algoResponse["path"].map(node=>{
         let currentNode:Node = new Node(node["row"],node["column"]);
         currentNode.distance = node["distance"];
         currentNode.isFinish = node["finish"];
         currentNode.isStart = node["start"];
+        currentNode.isWall = node["wall"];
         currentNode.isInShortestPath = true;
         return currentNode;
       });
-      //bubble up event
-      this.pathChange.emit(this.path);
+      this.dependenciesService.setPath(path);
+      //animate algorithm
+      this.dependenciesService.animate();
     });
   }
 
   resetGraph(){
-    this.reset = !this.reset;
-    this.resetChange.emit(this.reset);
+    //reset graph
+    this.dependenciesService.resetGraph();
+    //reset walls
+    this.dependenciesService.resetWalls();
   }
 
 }

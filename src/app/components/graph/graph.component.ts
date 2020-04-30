@@ -1,7 +1,9 @@
-import { Component, OnInit, SimpleChanges, Input} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Node } from '../../models/node';
+import { NodeComponent } from '../node/node.component';
+import { DependenciesService } from 'src/app/services/dependencies.service';
 
-const ANIMATION_WAIT = 20;
+const ANIMATION_WAIT = 5;
 
 @Component({
   selector: 'app-graph',
@@ -9,45 +11,32 @@ const ANIMATION_WAIT = 20;
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit {
+  //2d matrix representing the graph
   graph: Node[][] = [];
-  @Input() path: Node[];
-  @Input() start: number[];
-  @Input() end: number[];
-  @Input() rows: number;
-  @Input() columns: number;
-  @Input() visitedNodesInOrder: Node[];
-  @Input() reset: boolean;
-  constructor() { }
+  //pointer to previous node while moving start/end
+  prevNode:NodeComponent;
+  constructor(private dependenciesService:DependenciesService) { }
 
   ngOnInit(): void {
-    this.resetGraph();
+    this.dependenciesService.setGraph(this);
+    this.initGraph();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (typeof changes["path"] !== "undefined" && typeof changes["path"].currentValue !== "undefined" &&
-    typeof changes["visitedNodesInOrder"] !== "undefined" && typeof changes["visitedNodesInOrder"].currentValue !== "undefined") {
-      this.animateAlgo();
-    }
-    if (typeof changes["reset"] !== "undefined") {
-      this.resetGraph();
-    }
-  }
-
-  resetGraph() {
+  initGraph() {
     //initialize graph
     this.graph = [[]];
     //add nodes to graph
-    for (let row = 0; row < this.rows; row++) {
+    for (let row = 0; row < this.dependenciesService.getRows(); row++) {
       //push new row
       this.graph.push([]);
-      for (let col = 0; col < this.columns; col++) {
+      for (let col = 0; col < this.dependenciesService.getColumns(); col++) {
         let current: Node = new Node(row, col);
         //check if it's starting node
-        if (row === this.start[0] && col == this.start[1]) {
+        if (row === this.dependenciesService.getStart()[0] && col == this.dependenciesService.getStart()[1]) {
           current.isStart = true;
         }
         //check if it's end node
-        if (row === this.end[0] && col == this.end[1]) {
+        if (row === this.dependenciesService.getEnd()[0] && col == this.dependenciesService.getEnd()[1]) {
           current.isFinish = true;
         }
         //push new column
@@ -62,21 +51,23 @@ export class GraphComponent implements OnInit {
   }
 
   async animatedVisitedNodes(){
+    let visitedNodesInOrder:Node[] = this.dependenciesService.getVisitedNodesInOrder();
     //find finish node animation
-    for (let i = 0; i < this.visitedNodesInOrder.length; i++) {
-      let row = this.visitedNodesInOrder[i].row;
-      let column = this.visitedNodesInOrder[i].column;
-      this.graph[row][column] = this.visitedNodesInOrder[i];
+    for (let i = 0; i < visitedNodesInOrder.length; i++) {
+      let row = visitedNodesInOrder[i].row;
+      let column = visitedNodesInOrder[i].column;
+      this.graph[row][column] = visitedNodesInOrder[i];
       await this.wait(ANIMATION_WAIT);
     }
   }
 
   async animatePath(){
+    let path = this.dependenciesService.getPath();
     //shortest path found animation
-    for (let i = 0; i < this.path.length; i++) {
-      let row = this.path[i].row;
-      let column = this.path[i].column;
-      this.graph[row][column] = this.path[i];
+    for (let i = 0; i < path.length; i++) {
+      let row = path[i].row;
+      let column = path[i].column;
+      this.graph[row][column] = path[i];
       await this.wait(ANIMATION_WAIT);
     }
   }

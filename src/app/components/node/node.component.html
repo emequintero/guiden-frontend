@@ -1,1 +1,3 @@
-<div [class]="className"></div>
+<div [class]="className" (mouseover)="nodeViewUpdate()" 
+(mouseup)="stopUpdate()" (mousedown)="startUpdate()"
+draggable="false"></div>

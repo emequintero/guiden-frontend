@@ -20,3 +20,7 @@
 .visited{
     background-color: green;
 }
+
+.wall{
+    background-color: black;
+}
