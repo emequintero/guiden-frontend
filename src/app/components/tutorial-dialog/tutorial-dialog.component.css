@@ -1,0 +1,70 @@
+.dialog{
+    min-width: 58vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5vh 3vw;
+}
+
+img{
+    width: 180px;
+}
+
+.content-container{
+    overflow: hidden;
+}
+
+.dialog-content, div.content{
+    text-align: center;
+}
+
+.dialog-content, div.content{
+    position: relative;
+    overflow: auto;
+    height: 100%;
+}
+
+div.content{
+    height: fit-content;
+}
+
+.pagination{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+h1.title, h2.subtitle, div.content{
+    margin: 3vh 0;
+}
+
+h1.title{
+    font-size: 42px;
+    line-height: calc(42px + 2vh);
+}
+
+h2.subtitle{
+    font-size: 26px;
+    font-weight: 400;
+    line-height: calc(26px + 2vh);
+}
+
+.buttons{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.buttons button{
+    color: rgb(135, 189, 78);
+    font-weight: 600;
+}
+
+.skip-btn{
+    flex-grow: 1;
+}
+
+.next-btn{
+    margin-left: 1vw;
+}

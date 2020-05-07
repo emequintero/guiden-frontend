@@ -52,6 +52,7 @@ export class GraphComponent implements OnInit {
   async animateAlgo() {
     await this.animatedVisitedNodes();
     await this.animatePath();
+    this.dependenciesService.setAnimationInProgress(false);
   }
 
   async animatedVisitedNodes(){

@@ -14,6 +14,7 @@ export class DependenciesService {
   private graph: GraphComponent = null;
   private path: Node[];
   private visitedNodesInOrder: Node[];
+  private animationInProgress:boolean;
   constructor() { }
 
   getStart(): number[] {
@@ -86,5 +87,13 @@ export class DependenciesService {
 
   animate(){
     this.graph.animateAlgo();
+  }
+
+  setAnimationInProgress(animationInProgress:boolean){
+    this.animationInProgress = animationInProgress;
+  }
+
+  getAnimationInProgress():boolean{
+    return this.animationInProgress;
   }
 }

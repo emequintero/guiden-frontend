@@ -86,6 +86,10 @@
     min-width: 10vw;
 }
 
-.mdc-list{
+.algo-menu{
     width: max-content;
+}
+
+#alert{
+    text-align: center;
 }
