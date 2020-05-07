@@ -10,7 +10,8 @@ import { Node } from '../../models/node';
 })
 export class NavComponent implements OnInit {
   algoDescription: string = "";
-  algorithms: string[] = ["Dijkstra", "Breadth First Search", "Depth First Search"];
+  algorithms: string[] = ["Dijkstra's Algorithm", "A*", "Best First Search", 
+  "Breadth First Search", "Depth First Search"];
   selectedAlgo: string = "";
   constructor(private algoService: AlgoService, private dependenciesService: DependenciesService) { }
 
@@ -63,8 +64,16 @@ export class NavComponent implements OnInit {
 
   setAlgorithm(algo: string) {
     switch(algo.trim()){
-      case "Dijkstra":{
+      case "Dijkstra's Algorithm":{
         algo = "dijkstra";
+        break;
+      }
+      case "A*":{
+        algo = "astar";
+        break;
+      }
+      case "Best First Search":{
+        algo = "bestfirstsearch";
         break;
       }
       case "Depth First Search":{
