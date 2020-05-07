@@ -7,10 +7,10 @@
     </div>
     <div class="section button">
         <div mdcMenuSurfaceAnchor #algorithmAnchor>
-            <button class="button-guiden" mdc-button raised outlined (click)="algorithmGroup.open = !algorithmGroup.open">
-                <mdc-icon>arrow_drop_down</mdc-icon>{{selectedAlgo | uppercase}}
+            <button class="button-guiden algo-btn" mdc-button raised outlined (click)="algorithmGroup.open = !algorithmGroup.open">
+                <mdc-icon>arrow_drop_down</mdc-icon>{{selectedAlgo.length === 0 ? 'ALGORITHMS' : selectedAlgo | uppertrim}}
             </button>
-            <mdc-menu #algorithmGroup [anchorElement]="algorithmAnchor">
+            <mdc-menu #algorithmGroup class="algo-menu" [anchorElement]="algorithmAnchor" [anchorCorner]="'bottomStart'">
                 <mdc-list>
                     <mdc-list-item *ngFor="let algo of algorithms" [value]="algo"
                         (click)="setAlgorithm($event.target.innerHTML)">
@@ -25,10 +25,10 @@
             <button mdcIconButton (click)="help.open = !help.open">
                 <mdc-icon>help_outline</mdc-icon>
             </button>
-            <mdc-menu #help [anchorElement]="helpAnchor">
+            <mdc-menu #help [anchorElement]="helpAnchor" [anchorCorner]="'bottomStart'">
                 <mdc-list>
                     <mdc-list-item class="description">
-                        {{algoDescription}}
+                        <div [innerHTML]="algoDescription"></div>
                     </mdc-list-item>
                 </mdc-list>
             </mdc-menu>
@@ -36,5 +36,10 @@
     </div>
     <div class="section button">
         <button class="button-guiden-alt" mdc-button raised (click)="findPath()">FIND PATH</button>
+    </div>
+</div>
+<div class="mdc-snackbar">
+    <div class="mdc-snackbar__surface">
+        <div id="alert" class="mdc-snackbar__label" role="status" aria-live="polite"></div>
     </div>
 </div>

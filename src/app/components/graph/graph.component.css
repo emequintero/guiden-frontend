@@ -5,12 +5,13 @@
     }
     div.visualizer{
         height: auto;
+        width: 88vw !important;
     }
 }
 
 @media only screen and (min-width:401px) and (max-width:960px) {
     div.visualizer {
-        width: 86vw !important;
+        width: 88vw !important;
     }
 }
 

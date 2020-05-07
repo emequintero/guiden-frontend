@@ -2,6 +2,8 @@
     div.container{
         width: 100vw;
         background-color: #3C4042;
+        padding-top: 15px;
+        padding-bottom: 12px;
     }
     div.section.title, div.section.button{
         width: 100vw;
@@ -10,6 +12,8 @@
     }
     div.section.title{
         margin: 32px 0;
+        font-size: 16px !important;
+        padding: 10px;
     }
     div.section.button{
         background-color: #3C4042;
@@ -76,4 +80,16 @@
 .description{
     width: auto;
     height: auto;
+}
+
+.algo-btn{
+    min-width: 10vw;
+}
+
+.algo-menu{
+    width: max-content;
+}
+
+#alert{
+    text-align: center;
 }

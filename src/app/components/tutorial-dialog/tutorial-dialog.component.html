@@ -1,0 +1,32 @@
+<mdc-dialog>
+	<mdc-dialog-container>
+		<mdc-dialog-surface class="dialog">
+			<mdc-dialog-content class="content-container">
+				<span class="pagination">{{data.pagination.current}}/{{data.pagination.length}}</span>
+				<div class="dialog-content">
+					<h1 class="title">{{data.title}}</h1>
+					<h2 class="subtitle">{{data.subtitle}}</h2>
+					<div class="content" [innerHTML]="data.content"></div>
+					<img [style.width.px]="imgWidth" src="../../../assets/{{data.image}}" />
+				</div>
+			</mdc-dialog-content>
+			<mdc-dialog-actions class="buttons">
+				<span class="skip-btn">
+					<button mdcDialogButton mdcDialogAction="close">Skip Tutorial</button>
+				</span>
+				<span class="prev-btn">
+					<button mdcDialogButton (click)="prevStep()">Previous</button>
+				</span>
+				<span class="next-btn">
+					<div *ngIf="data.pagination.current === data.pagination.length; then finish else next"></div>
+					<ng-template #next>
+						<button mdcDialogButton (click)="nextStep()">Next</button>
+					</ng-template>
+					<ng-template #finish>
+						<button mdcDialogButton mdcDialogAction="close">Finish</button>
+					</ng-template>
+				</span>
+			</mdc-dialog-actions>
+		</mdc-dialog-surface>
+	</mdc-dialog-container>
+</mdc-dialog>

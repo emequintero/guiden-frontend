@@ -48,14 +48,18 @@ export class NodeComponent implements OnInit {
           //add to walls
           this.dependenciesService.addWall([this.node.row, this.node.column]);
         }
-        else if(!this.node.isWall && !this.node.isFinish && !this.node.isStart){
+        else if (!this.node.isWall && !this.node.isFinish && !this.node.isStart) {
           this.className = "node";
         }
       }
-      //node is start/end node
-      else {
-        //move start node
-        if (movingStartNode && typeof this.prevNode != "undefined") {
+    }
+    //node is start/end node
+    else {
+      //move start node
+      if (movingStartNode && typeof this.prevNode != "undefined") {
+        if (this.node.isFinish || this.prevNode.node.isFinish) {
+          this.movementService.setMovingStartNode(false);
+        } else {
           //set new start point
           this.dependenciesService.setStart([this.node.row, this.node.column]);
           //set previous node to blank spot
@@ -65,31 +69,38 @@ export class NodeComponent implements OnInit {
           this.node.isStart = true;
           this.className = "node start";
         }
-        //move end node
-        else if (movingEndNode && typeof this.prevNode != "undefined") {
+      }
+      //move end node
+      else if (movingEndNode && typeof this.prevNode != "undefined") {
+        if (this.node.isStart || this.prevNode.node.isStart) {
+          this.movementService.setMovingEndNode(false);
+        }
+        else {
           //set new end point
           this.dependenciesService.setFinish([this.node.row, this.node.column]);
           //set previous node to blank spot
-          this.prevNode.node.isFinish = false
+          this.prevNode.node.isFinish = false;
           this.prevNode.className = "node";
           //set new style to node end
+          this.node.isFinish = true;
           this.className = "node finish";
-          this.node.isFinish = false;
         }
-        this.prevNode = this;
-        this.prevNodeChange.emit(this.prevNode);
       }
-      this.nodeChange.emit(this.node);
+      this.prevNode = this;
+      this.prevNodeChange.emit(this.prevNode);
     }
+    this.nodeChange.emit(this.node);
   }
 
   startUpdate() {
-    this.movementService.setUpdatingNodes(true);
     if (this.node.isStart) {
       this.movementService.setMovingStartNode(true);
     }
     else if (this.node.isFinish) {
       this.movementService.setMovingEndNode(true);
+    }
+    else {
+      this.movementService.setUpdatingNodes(true);
     }
     this.nodeViewUpdate();
   }

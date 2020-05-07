@@ -19,6 +19,6 @@ export class AlgoService {
       start : start,
       walls : walls
     };
-    return this.http.post(BASE_URL + algorithm, options);
+    return this.http.post(BASE_URL + algorithm.replace(/ /g,""), options);
   }
 }
