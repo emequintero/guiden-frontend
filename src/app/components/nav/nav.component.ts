@@ -10,15 +10,15 @@ import { Node } from '../../models/node';
 })
 export class NavComponent implements OnInit {
   algoDescription: string = "";
-  algorithms: string[] = ["Dijkstra", "A*"];
-  selectedAlgo: string = "Dijkstra";
+  algorithms: string[] = ["Dijkstra", "Breadth First Search", "Depth First Search"];
+  selectedAlgo: string = "";
   constructor(private algoService: AlgoService, private dependenciesService: DependenciesService) { }
 
   ngOnInit(): void {
   }
 
   findPath() {
-    this.algoService.findPath("dijkstra",
+    this.algoService.findPath(this.selectedAlgo,
       this.dependenciesService.getStart(), this.dependenciesService.getFinish(),
       this.dependenciesService.getRows(), this.dependenciesService.getColumns(),
       this.dependenciesService.getWalls())
@@ -59,10 +59,24 @@ export class NavComponent implements OnInit {
     this.dependenciesService.setStart([5, 11]);
     //reset finish node
     this.dependenciesService.setFinish([5, 28]);
-}
+  }
 
-setAlgorithm(){
-
-}
+  setAlgorithm(algo: string) {
+    switch(algo.trim()){
+      case "Dijkstra":{
+        algo = "dijkstra";
+        break;
+      }
+      case "Depth First Search":{
+        algo = "dfs";
+        break;
+      }
+      case "Breadth First Search":{
+        algo = "bfs";
+        break;
+      }
+    }
+    this.selectedAlgo = algo;
+  }
 
 }
